@@ -40,7 +40,7 @@ def DA1(eeg, stimulus, label):      # for num_mismatch == 4
         indices = torch.randperm(B//5).to(eeg.device)
         eeg_shuffle = eeg[indices]
         stimuli_att_shuffle = stimuli_att[indices]
-        rand = torch.rand(B//5).unsqueeze(-1).unsqueeze(-1).to(eeg.device) * 0.6
+        rand = torch.rand(B//5).unsqueeze(-1).unsqueeze(-1).to(eeg.device) * 0.2
         eeg = eeg + eeg_shuffle * rand
         label = torch.cat((label, rand.squeeze(-1).repeat(5, 1)), -1) / (1 + rand.squeeze(-1).repeat(5, 1))    # (B, 6)
         eeg_stack = torch.cat([eeg, eeg, eeg, eeg, eeg], 0)
